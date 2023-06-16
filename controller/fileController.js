@@ -8,7 +8,7 @@ module.exports.UploadFile = async (req, res, next) => {
     try {
         const name = req.body.name //add option to name file
         const buffer = req.file.buffer;
-        const userId = req.body.user_idx
+        const userId = req.body.user_id
 
         const size = buffer.length;
         if (size > MAX_FILE_SIZE) {

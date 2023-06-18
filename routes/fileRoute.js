@@ -1,6 +1,6 @@
 
 const router = require("express").Router()
-const { multerUploads, upload } = require("../middlewares/multer")
+const { upload } = require("../middlewares/multer")
 const { UploadFile, downloadFile, fetchAllFiles, deleteFile, deleteMultipleFiles} = require("../controller/fileController")
 
 

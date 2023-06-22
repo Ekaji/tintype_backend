@@ -15,6 +15,6 @@ router.post('/file-download/:id', downloadFile);
 router.post('/page/:pageNumber', fetchAllFiles);
 router.post('/delete-file/:fileId', deleteFile)
 router.post('/delete-selected-file', deleteMultipleFiles)
-router.post('', get_files_by_user_id)
+router.get('/users/:userId', get_files_by_user_id)
 
 module.exports = router

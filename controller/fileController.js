@@ -53,8 +53,10 @@ module.exports.UploadFile = async (req, res, next) => {
 
 module.exports.get_files_by_user_id = async(req, res, next) => {
   try {
+    console.log(req.params.userId)
     const owner = req.params.userId;
     const fileRefs = await FileRef.find({ owner });
+
 
     if (!fileRefs || fileRefs.length === 0) {
       throw new Error(`No files found for user`);
@@ -62,8 +64,8 @@ module.exports.get_files_by_user_id = async(req, res, next) => {
 
     res.status(200).json({ fileRefs });
   } catch (error) {
-    console.error(error);
-    next(new Error('Failed to retrieve files for user'));
+    // console.error(error);
+    next(error);
   }
 }
 

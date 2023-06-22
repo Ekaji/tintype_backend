@@ -51,6 +51,22 @@ module.exports.UploadFile = async (req, res, next) => {
     }
 }
 
+module.exports.get_files_by_user_id = async(req, res, next) => {
+  try {
+    const owner = req.params.userId;
+    const fileRefs = await FileRef.find({ owner });
+
+    if (!fileRefs || fileRefs.length === 0) {
+      throw new Error(`No files found for user`);
+    }
+
+    res.status(200).json({ fileRefs });
+  } catch (error) {
+    console.error(error);
+    next(new Error('Failed to retrieve files for user'));
+  }
+}
+
 module.exports.downloadFile = async (req, res, next) => {
     try {
       const fileId = req.params.id;
@@ -75,7 +91,7 @@ module.exports.downloadFile = async (req, res, next) => {
       res.setHeader('Content-Type', file.mimetype);
       res.setHeader('Content-Length', file.length);
       res.setHeader('Content-Disposition', `attachment; filename=${fileRef.name}`);
-      res.send(file.data);
+      res.status(200).send(file.data);
     } catch (error) {
         next(error)
     //   console.error(error);
